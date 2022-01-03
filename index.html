@@ -1,0 +1,736 @@
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .stage {
+            display: block;
+            margin: 0;
+            width: 1920px;
+            height: 1080px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .black-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 1920px;
+            height: 13px;
+            transform: rotate(-0.2deg);
+            background: black;
+        }
+        .animation-paused *{
+            animation-play-state: paused!important;
+        }
+        @keyframes stage {
+            from {
+                visibility: visible;
+            }
+            to {
+                visibility: hidden;
+            }
+        }
+        .play-mask {
+            z-index: 10;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+    <style>
+        #p1 {
+            animation: stage 9s 0.1s step-end forwards;
+            visibility: hidden;
+        }
+        .fu {
+            background: url("./福.png") center/contain;
+            width: 475px;
+            height: 475px;
+            position: absolute;
+        }
+        .fu.actor-1 {
+            animation: fu-actor-1 9s step-end forwards;
+        }
+        .fu.actor-2 {
+            animation: fu-actor-2 9s step-end forwards;
+        }
+        .fu.actor-3 {
+            animation: fu-actor-3 9s step-end forwards;
+        }
+        @keyframes fu-actor-1 {
+            0% {
+                visibility: hidden;
+                
+            }
+
+            4.5% {
+                visibility: visible;
+                top: 248px;
+                left: 700px;
+                
+            }
+            27.2% {
+                top: 308px;
+                left: 756px;
+                transform: scale(0.99);
+                
+            }
+            31.6% {
+                transform: scale(2.15) translateY(-5px);
+                
+            }
+            36.1% {
+                transform: scale(2.15) translate(-210px,0px);
+            }
+            41.8% {
+                transform: scale(2.15) translate(-20px,-15px);
+            }
+            46.7% {
+                transform: scale(2.15) translate(-20px,5px) rotate(180deg);
+            }
+            49.3% {
+                transform: scale(2.15) translate(-20px,5px) rotate(180deg);
+                animation-timing-function: linear;
+            }
+            72.4% {
+                transform: scale(2.25) translate(-20px,5px) rotate(3600deg);
+                animation-timing-function: step-end;
+            }
+            72.401% {
+                transform: scale(2.25) translate(184px, 15px) rotate(3600deg);
+                animation-timing-function: linear;
+            }
+            100% {
+                transform: scale(2.15) translate(184px, 15px) rotate(7200deg);
+            }
+        }
+        @keyframes fu-actor-2 {
+            0% {
+                visibility: hidden;
+                
+            }
+
+            14.5% {
+                visibility: visible;
+                top: 248px;
+                left: 1215px;
+                
+            }
+            27.2% {
+                visibility: hidden;
+            }
+            36.1% {
+                visibility: visible;
+                transform: scale(2.25) translate(12px,29px);
+            }
+            41.8% {
+                visibility: hidden;
+            }
+            72.4% {
+                visibility: visible;
+                transform: scale(2.15) translate(-500px, -5px) rotate(0deg);
+                animation-timing-function: linear;
+            }
+            100% {
+                transform: scale(2.15) translate(-500px, -5px) rotate(3600deg);
+            }
+        }
+        @keyframes fu-actor-3 {
+            0% {
+                visibility: hidden;
+                
+            }
+
+            22.5% {
+                visibility: visible;
+                top: 248px;
+                left: 174px;
+                
+            }
+            27.2% {
+                visibility: hidden;
+            }
+
+            100% {
+                visibility: hidden;
+            }
+        }
+    </style>
+    <style>
+        #p2 {
+            animation: stage 13.9s 9s step-end forwards;
+            visibility: hidden;
+        }
+        .baozhu {
+            animation: baozhu 1s linear forwards;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            background: url(爆竹.png) no-repeat center/contain;
+            width: 300px;
+            height: 680px;
+            position: absolute;
+            display: block;
+        }
+        @keyframes baozhu {
+            from {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            to {
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            }
+        }
+        .denglong {
+            position: absolute;
+            display: block;
+            background: url("灯笼.png") no-repeat center/contain;
+            width: 770px;
+            height: 1045px;
+            visibility: hidden;
+            animation: denglong 12s 10.9s linear forwards;
+        }
+        @keyframes denglong {
+            0% {
+                visibility: visible;
+                top: 88px;
+                left: -84px;
+            }
+            16.8% {
+                top: 80px;
+                left: 1200px;
+                transform: rotate(0);
+            }
+            24.1% {
+                transform: rotate(3600deg);
+                left: -770px;
+                top: -200px;
+                animation-timing-function: step-end;
+            }
+            29.1% {
+                top: 80px;
+                left: 1920px;
+                transform: rotate(0);
+            }
+            45.8% {
+                top: 80px;
+                left: 375px;
+                transform: rotate(0);
+            }
+            54.1% {
+                transform: rotate(3600deg);
+                left: 1920px;
+                top: 0;
+                animation-timing-function: step-end;
+            }
+            54.11% {
+                transform: rotate(0deg);
+                left: 1920px;
+                top: 80px;
+            }
+            59.5% {
+                top: 79px;
+                left: 605px;
+            }
+            62.08% {
+                top: 170px;
+                left: 565px;
+                transform: scale(1);
+                animation-timing-function: step-end;
+            }
+            63.7% {
+                top: 170px;
+                left: 565px;
+                transform: scale(1.6);
+                animation-timing-function: step-end;
+            }
+            65.25% {
+                top: 185px;
+                left: 545px;
+                transform: scale(1.85);
+                animation-timing-function: step-end;
+            }
+            70.25% {
+                visibility: hidden;
+                animation-timing-function: step-end;
+            }
+            71.25% {
+                visibility: visible;
+                top: 147px;
+                left: 642px;
+                transform: scale(1.15);
+                animation-timing-function: step-end;
+            }
+            76.6% {
+                top: 147px;
+                left: 605px;
+                transform: scale(1.15);
+                animation-timing-function: step-end;
+            }
+            76.9% {
+                top: 161px;
+                left: 573px;
+                transform: scale(1.55);
+                animation-timing-function: step-end;
+            }
+            81.9% {
+                top: 218px;
+                left: 603px;
+                transform: scale(1.8);
+                animation-timing-function: step-end;
+            }
+            85% {
+                top: 171px;
+                left: 586px;
+                transform: scale(1.8);
+                animation-timing-function: step-end;
+            }
+            88% {
+                top: -322px;
+                left: -152px;
+                transform: scale(1.8);
+                animation-timing-function: linear;
+            }
+            100% {
+                visibility: visible;
+                top: 1200px;
+                left: 2000px;
+                transform: scale(1.8);
+            }
+
+        }
+    </style>
+    <style>
+        #p3 {
+            animation: stage 6.3s 23s step-end forwards;
+        }
+    </style>
+    <style>
+        #p4 {
+            animation: stage 14.25s 29.4s forwards;
+            visibility: hidden;
+        }
+        .fu.actor-4 {
+            animation: fu-actor-4 14.25s 29.4s linear forwards;
+        }
+        .fu.actor-5 {
+            animation: fu-actor-5 14.25s 29.4s linear forwards;
+        }
+        .fu.actor-6 {
+            animation: fu-actor-6 14.25s 29.4s linear forwards;
+        }
+        .fu.actor-7 {
+            animation: fu-actor-7 13.35s 30.3s linear forwards;
+            top: 250px;
+            left: 1780px;
+        }
+        .fu.fu-rotate {
+            animation: fu-rotate 0.2s steps(8) infinite;
+            clip-path: polygon(25% 25%, 25% 75%, 75% 75%, 75% 25%);
+        }
+        @keyframes fu-rotate {
+            from{
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes fu-actor-4 {
+            0% {
+                transform: rotate(-45deg);
+                top: 320px;
+                left: 225px;
+            }
+            17.05% {
+                top: -139px;
+                left: 648px;
+            }
+            39.29% {
+                top: 276px;
+                left: 1184px;
+            }
+            61.12% {
+                top: 634px;
+                left: 733px;
+            }
+            74.38% {
+                top: 307px;
+                left: 376px;
+            }
+            100% {
+                transform: rotate(4800deg);
+                top: -35px;
+                left: 685px;
+            }
+        }
+        @keyframes fu-actor-5 {
+            0% {
+                top: 690px;
+                left: 1920px;
+                transform: scale(0.8) rotate(0);
+            }
+            34.38% {
+                left: -255px;
+                top: 690px;
+                transform: scale(0.8) rotate(1800deg);
+                animation-timing-function: step-end;
+            }
+            102% {
+                animation-play-state: paused;
+                visibility: hidden;
+                left: -255px;
+                top: 690px;
+                transform: scale(0.8) rotate(1800deg);
+            }
+        }
+        @keyframes fu-actor-6 {
+            from {
+                transform: scale(0.6);
+                left: -285px;
+                top: 12px;
+            }
+            to {
+                transform: scale(0.6);
+                left: 1830px;
+                top: 12px;
+            }
+        }
+        @keyframes fu-actor-7 {
+            from {
+                transform: rotate(0);
+                top: 270px;
+                left: 1920px;
+            }
+            to {
+                transform: rotate(3600deg);
+                top: 270px;
+                left: -475px;
+            }
+        }
+        .danmaku {
+            color: red;
+            position: absolute;
+            animation: danmaku 16.2s 32.8s linear forwards;
+            left: 1920px;
+            font-size: 110px;
+            width: 1920px;
+            font-weight: 100;
+        }
+        .danmaku.actor-1 {
+            top: 17px;
+        }
+        .danmaku.actor-2 {
+            top: 177px;
+        }
+        @keyframes danmaku {
+            from {
+                left: 1920px;
+            }
+            to {
+                left: -330px;
+            }
+        }
+
+        .fu.actor-8 {
+            visibility: hidden;
+            animation: fu-actor-8 23.3s 41.3s linear;
+        }
+        @keyframes fu-actor-8 {
+            0% {
+                visibility: visible;
+                top: 341px;
+                left: 710px;
+                transform: scale(1.35);
+            }
+            93.99% {
+                top: 341px;
+                left: 762px;
+                transform: scale(4.7);
+            }
+            100% {
+                top: 341px;
+                left: 710px;
+                transform: scale(1.35);
+            }
+        }
+    </style>
+    <style>
+        #p5 {
+            animation: stage-5 1s 45.8s forwards;
+            visibility: hidden;
+        }
+        .text {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: url(欢欢喜喜过大年.png) no-repeat;
+            background-size: 1015px;
+            transform-origin: bottom;
+            animation: text-scale 3s linear forwards;
+        }
+        .text.actor-1 {
+            top: 295px;
+            left: 485px;
+            animation-name: text-scale-init;
+            animation-delay: 45.8s;
+        }
+        .text.actor-2 {
+            top: 295px;
+            left: 755px;
+            animation-delay: 46.6s;
+        }
+        .text.actor-3 {
+            top: 295px;
+            left: 1015px;
+            background-position: -780px 0;
+            animation-delay: 48.9s;
+        }
+        .text.actor-4 {
+            top: 295px;
+            left: 1285px;
+            background-position: -780px 0;
+            animation-delay: 51.2s;
+        }
+        .text.actor-5 {
+            top: 640px;
+            left: 620px;
+            background-position: -130px -340px;
+            animation-delay: 53.5s;
+        }
+        .text.actor-6 {
+            top: 640px;
+            left: 895px;
+            background-position: -400px -340px;
+            animation-delay: 55.8s;
+        }
+        .text.actor-7 {
+            top: 620px;
+            left: 1160px;
+            background-position: -660px -320px;
+            animation-delay: 58.1s;
+        }
+        @keyframes text-scale {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            33.3% {
+                opacity: 0.3;
+                transform: scale(2);
+            }
+            66.6% {
+                opacity: 0.3;
+                transform: scale(2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes text-scale-init {
+            0% {
+                opacity: 0.3;
+                transform: scale(2);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        @keyframes stage-5 {
+            from {
+                visibility: hidden;
+            }
+            to {
+                visibility: visible;
+            }
+        }
+    </style>
+    <script>
+        var isPlaying = false;
+        function play() {
+            var a = document.getElementById('audio');
+            if (!isPlaying) {
+                document.body.className = '';
+                a.play();
+                document.querySelector(".play-mask").style.opacity = '0';
+            } else {
+                a.pause();
+                document.body.className = 'animation-paused';
+                document.querySelector(".play-mask").style.opacity = '1';
+            }
+            isPlaying = !isPlaying;
+        }
+    </script>
+</head>
+<body class="animation-paused">
+<div class="play-mask stage" onclick="play()">
+    点击屏幕开始播放
+</div>
+<audio src="bg.mp3" id="audio"></audio>
+<div class="black-bar"></div>
+<section id="p1" class="stage">
+    <div class="fu actor-1"></div>
+    <div class="fu actor-2"></div>
+    <div class="fu actor-3"></div>
+</section>
+<section id="p2" class="stage">
+    <div class="baozhu" style="
+            animation-delay: 9.1s;
+            top: 213px;
+            left: 496px;"></div>
+    <div class="baozhu" style="
+            animation-delay: 9.68s;
+            top: 146px;
+            left: 1238px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 10.45s;
+            top: 244px;
+            left: 854px;
+            "></div>
+    <div class="denglong"></div>
+</section>
+<section id="p3" class="stage">
+    <div class="baozhu" style="
+            animation-delay: 23s;
+            top: 330px;
+            left: 41px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 23.2s;
+            top: 235px;
+            left: 163px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 23.4s;
+            top: 316px;
+            left: 408px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 23.7s;
+            top: 377px;
+            left: 469px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 23.8s;
+            top: 320px;
+            left: 1004px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 23.9s;
+            top: 216px;
+            left: 528px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 24.1s;
+            top: 285px;
+            left: 771px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 24.5s;
+            top: 230px;
+            left: 1125px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 24.7s;
+            top: 36px;
+            left: 692px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 24.9s;
+            top: 24px;
+            left: 1059px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 25.1s;
+            top: 85px;
+            left: 1300px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 25.3s;
+            top: 622px;
+            left: 721px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 25.5s;
+            top: 600px;
+            left: 1085px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 25.5s;
+            top: 670px;
+            left: 1332px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 25.7s;
+            top: 613px;
+            left: 1686px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 26.1s;
+            top: 220px;
+            left: 90px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 26.2s;
+            top: 200px;
+            left: 454px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 26.3s;
+            top: 270px;
+            left: 700px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 26.6s;
+            top: 209px;
+            left: 1055px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 27s;
+            top: 520px;
+            left: 860px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 27.2s;
+            top: 504px;
+            left: 1128px;
+            "></div>
+    <div class="baozhu" style="
+            animation-delay: 27.4s;
+            top: 509px;
+            left: 1828px;
+            "></div>
+</section>
+<section id="p4" class="stage">
+    <div class="fu actor-4">
+        <div class="fu fu-rotate"></div>
+    </div>
+    <div class="fu actor-5">
+        <div class="fu fu-rotate"></div>
+    </div>
+    <div class="fu actor-6"></div>
+    <div class="fu actor-7"></div>
+</section>
+<section id="danmaku" class="stage">
+    <div class="danmaku actor-1">过年啦</div>
+    <div class="danmaku actor-2">过年啦</div>
+    <div class="fu actor-8"></div>
+</section>
+<section id="p5" class="stage">
+    <div class="text actor-1"></div>
+    <div class="text actor-2"></div>
+    <div class="text actor-3"></div>
+    <div class="text actor-4"></div>
+    <div class="text actor-5"></div>
+    <div class="text actor-6"></div>
+    <div class="text actor-7"></div>
+</section>
+</body>
+</html>
