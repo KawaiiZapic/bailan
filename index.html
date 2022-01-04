@@ -1,7 +1,23 @@
 <html lang="zh-cn">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开摆</title>
     <style>
+        body{
+            background: white;
+        }
+        body.animation-paused {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+        body:not(.animation-paused) {
+            overflow: hidden;
+        }
+        .animation-paused .stage:not(.play-mask) {
+            filter: blur(12px);
+        }
         .stage {
             display: block;
             margin: 0;
@@ -42,6 +58,7 @@
             color: white;
             cursor: pointer;
             user-select: none;
+            text-align: center;
         }
     </style>
     <style>
@@ -50,7 +67,7 @@
             visibility: hidden;
         }
         .fu {
-            background: url("./福.png") center/contain;
+            background: url("./福.svg") no-repeat center/contain;
             width: 475px;
             height: 475px;
             position: absolute;
@@ -100,15 +117,15 @@
                 animation-timing-function: linear;
             }
             72.4% {
-                transform: scale(2.25) translate(-20px,5px) rotate(3600deg);
+                transform: scale(2.25) translate(-20px,5px) rotate(-2400deg);
                 animation-timing-function: step-end;
             }
             72.401% {
-                transform: scale(2.25) translate(184px, 15px) rotate(3600deg);
+                transform: scale(2.25) translate(184px, 15px) rotate(-2400deg);
                 animation-timing-function: linear;
             }
             100% {
-                transform: scale(2.15) translate(184px, 15px) rotate(7200deg);
+                transform: scale(2.15) translate(184px, 15px) rotate(-4800deg);
             }
         }
         @keyframes fu-actor-2 {
@@ -139,7 +156,7 @@
                 animation-timing-function: linear;
             }
             100% {
-                transform: scale(2.15) translate(-500px, -5px) rotate(3600deg);
+                transform: scale(2.15) translate(-500px, -5px) rotate(-2400deg);
             }
         }
         @keyframes fu-actor-3 {
@@ -171,7 +188,7 @@
         .baozhu {
             animation: baozhu 1s linear forwards;
             clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-            background: url(爆竹.png) no-repeat center/contain;
+            background: url(爆竹.svg) no-repeat center/contain;
             width: 300px;
             height: 680px;
             position: absolute;
@@ -188,7 +205,7 @@
         .denglong {
             position: absolute;
             display: block;
-            background: url("灯笼.png") no-repeat center/contain;
+            background: url("灯笼.svg") no-repeat center/contain;
             width: 770px;
             height: 1045px;
             visibility: hidden;
@@ -329,7 +346,7 @@
             left: 1780px;
         }
         .fu.fu-rotate {
-            animation: fu-rotate 0.2s steps(8) infinite;
+            animation: fu-rotate 0.4s steps(8) infinite;
             clip-path: polygon(25% 25%, 25% 75%, 75% 75%, 75% 25%);
         }
         @keyframes fu-rotate {
@@ -468,7 +485,7 @@
             position: absolute;
             width: 250px;
             height: 250px;
-            background: url(欢欢喜喜过大年.png) no-repeat;
+            background: url(欢欢喜喜过大年.svg) no-repeat;
             background-size: 1015px;
             transform-origin: bottom;
             animation: text-scale 3s linear forwards;
@@ -557,10 +574,12 @@
             var a = document.getElementById('audio');
             if (!isPlaying) {
                 document.body.className = '';
+                document.documentElement.requestFullscreen()
                 a.play();
                 document.querySelector(".play-mask").style.opacity = '0';
             } else {
                 a.pause();
+                document.exitFullscreen();
                 document.body.className = 'animation-paused';
                 document.querySelector(".play-mask").style.opacity = '1';
             }
@@ -570,7 +589,8 @@
 </head>
 <body class="animation-paused">
 <div class="play-mask stage" onclick="play()">
-    点击屏幕开始播放
+    点击屏幕开始播放<br>
+    进入全屏获得最佳效果
 </div>
 <audio src="bg.mp3" id="audio"></audio>
 <div class="black-bar"></div>
