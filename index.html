@@ -568,31 +568,13 @@
             }
         }
     </style>
-    <script>
-        var isPlaying = false;
-        function play() {
-            var a = document.getElementById('audio');
-            if (!isPlaying) {
-                document.body.className = '';
-                document.documentElement.requestFullscreen()
-                a.play();
-                document.querySelector(".play-mask").style.opacity = '0';
-            } else {
-                a.pause();
-                document.exitFullscreen();
-                document.body.className = 'animation-paused';
-                document.querySelector(".play-mask").style.opacity = '1';
-            }
-            isPlaying = !isPlaying;
-        }
-    </script>
 </head>
 <body class="animation-paused">
 <div class="play-mask stage" onclick="play()">
     点击屏幕开始播放<br>
     进入全屏获得最佳效果
 </div>
-<audio src="bg.mp3" id="audio"></audio>
+<audio src="bg.mp3" id="audio" preload="auto"></audio>
 <div class="black-bar"></div>
 <section id="p1" class="stage">
     <div class="fu actor-1"></div>
@@ -752,5 +734,31 @@
     <div class="text actor-6"></div>
     <div class="text actor-7"></div>
 </section>
+
+<script>
+    var isPlaying = false;
+    var a = document.getElementById('audio');
+    function play() {
+        if (!isPlaying) {
+            document.documentElement.requestFullscreen()
+            a.play();
+            document.querySelector(".play-mask").style.opacity = '0';
+        } else {
+            a.pause();
+            document.exitFullscreen();
+            document.querySelector(".play-mask").style.opacity = '1';
+        }
+        isPlaying = !isPlaying;
+    }
+    a.onplaying = function () {
+        document.body.className = '';
+    }
+    a.onpause = function () {
+        document.body.className = 'animation-paused';
+    }
+    a.onwaiting = function () {
+        document.body.className = 'animation-paused';
+    }
+</script>
 </body>
 </html>
